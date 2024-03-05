@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        body {background-color: powderblue;}
+        h1   {color: blue;}
+        p    {color: red;}
+
+        .container{
+            margin: auto;
+            max-width: 1000px;
+
+        }
+
+        .height{
+            margin-top: 5px;
+            padding: 5px;
+            border-radius: 5px;
+        }
+
+        .weight{
+            margin-top: 5px;
+            padding: 5px;
+            border-radius: 5px;
+
+        }
+
+        .BMI{
+            margin-top: 5px;
+            padding: 5px;
+            border-radius: 5px;
+        }   
+        
+        .lable{
+            font-weight: bold;
+        }
+        .button{
+            margin-top: 5px;
+            padding: 5px;
+            border-radius: 5px;
+            background-color:lightsalmon;
+            cursor: pointer;
+        }
+        .BMI{
+            font-weight: bold;
+
+        }
+        .error{
+            color: red;
+        }
+
+        .result{
+            color: blue;
+        }
+    </style>
+</head>
+<body>
+
+
+    <div class="container">
+
+  
+    <h1>Calculate your Body Mass Index (BMI)</h1>
+    <p>Use this service to:</p>
+    <ul>
+        <li>check the BMI of an adult aged 18 and over</li>
+        <li>get information about what to do next</li>
+    </ul>
+<p>You should not use this tool to diagnose any symptoms. If you are worried about your weight, contact your local pharmacist or GP surgery.</p>
+<h2>Who should not use this tool</h2>
+<p>You should not use this tool if you, or the person you're using it for:</p>
+<ul>
+    <li>are under 18 years old</li>
+    <li>are pregnant</li>
+    <li>have been diagnosed with an eating disorder, or think you may have one</li>
+    <li>have a condition that affects your height</li>
+</ul>
+<form action="">
+<lable class="lable">Height :</lable>
+<input class="height" id="height" type="text" placeholder="Enter your Height (cm)"><br>
+
+<lable class="lable">Weighht :</lable>
+<input class="weight" id="weight" type="text" placeholder="Enter your Weight (kg)"><br>
+<br>
+<lable class="lable">BMI Value   :</lable>
+<span class="BMI"  id="BMI" type="text" > </span><br>
+<span class="error" id="error"></span> <br>
+<span class="result" id="result"></span> <br>
+
+<button type="button" class="button" id="button" onclick="bmicalculate()">Calculate </button> <br>
+<br>
+
+</form>
+
+</div>
+
+<script>
+
+function bmicalculate(){  
+
+const height = parseFloat(document.getElementById("height").value.trim())/100;
+const weight = parseFloat(document.getElementById("weight").value.trim());
+const BMI = document.getElementById("BMI");
+const errormessage = document.getElementById("error");
+const result = document.getElementById("result");
+
+if(height === "" ||weight === "" ){
+    errormessage.textContent = "please enter a valid values.";
+    BMI.textContent = "";
+    return;
+}
+
+if(isNaN(height) || isNaN(weight)){
+    errormessage.textContent = "please enter numaric values.";
+    BMI.textContent = "";
+    return;
+}
+
+const bmiValue =(weight/(height*height));
+
+BMI.innerHTML = bmiValue.toFixed(2);
+errormessage.textContent = "";
+
+if(BMI.innerHTML<18.5){
+result.textContent = "You are Under weight.";
+}else if(18.5 < BMI.innerHTML && BMI.innerHTML<=25){
+result.textContent = "You are Normal weight.";
+}else if(25 < BMI.innerHTML && BMI.innerHTML <=30){
+result.textContent = "You are Over weight.";
+}else{
+result.textContent = "You are Obese.";
+
+}
+
+}
+</script>
+</body>
+</html>
